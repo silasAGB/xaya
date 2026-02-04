@@ -12,6 +12,6 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findByUtilisateurId(Long utilisateurId);
     List<Reservation> findBySalleId(Long salleId);
-    List<ReservationRepository> findBySalleAndDateEvenement(SalleRepository salle, LocalDate dateEvenement);
+    List<ReservationRepository> findBySalleAndDateReservation(SalleRepository salle, LocalDate dateReservation);
 	Reservation save(Reservation reservation);
 }
