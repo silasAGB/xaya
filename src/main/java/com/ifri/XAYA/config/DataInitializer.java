@@ -36,13 +36,13 @@ public class DataInitializer {
                             PasswordEncoder encoder,
                             String nom,
                             String email,
-                            String password) {
+                            String motDepasse) {
 
         if (!repo.existsByEmail(email)) {
             Utilisateur admin = new Utilisateur();
             admin.setNom(nom);
             admin.setEmail(email);
-            admin.setMotDePasse(encoder.encode(password));
+            admin.setMotDePasse(encoder.encode(motDepasse));
             admin.setRole(Role.ADMIN);
 
             repo.save(admin);
