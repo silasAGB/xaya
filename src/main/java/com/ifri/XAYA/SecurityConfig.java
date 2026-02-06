@@ -28,7 +28,10 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginProcessingUrl("/login") // 👈 IMPORTANT pour Postman
+                .loginProcessingUrl("/login")
+                .usernameParameter("username") // 👈 AJOUTÉ: accepte "username" du formulaire
+                .defaultSuccessUrl("/utilisateurs", true) // 👈 AJOUTÉ: redirection après login
+                .failureUrl("/login?error=true") // 👈 AJOUTÉ: redirection si erreur
                 .permitAll()
             )
             .logout(logout -> logout.permitAll());
