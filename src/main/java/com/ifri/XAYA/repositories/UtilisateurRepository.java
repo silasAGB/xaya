@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ifri.XAYA.models.Role;
 import com.ifri.XAYA.models.Utilisateur;
+import java.util.Optional;
 
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
@@ -15,5 +16,5 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 
     long countByRole(Role role);
     
-    Utilisateur findByEmail(String email);
+    Optional<Utilisateur> findByEmail(String email);
 }
