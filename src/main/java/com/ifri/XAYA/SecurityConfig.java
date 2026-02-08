@@ -23,19 +23,24 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/register").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
+            	    // Ajoute "/error" ici absolument
+            	    .requestMatchers("/connexion", "/login", "/error", "/inscription", "/css/**", "/js/**", "/images/**").permitAll()
+            	    .requestMatchers("/admin/**").hasRole("ADMIN")
+            	    .anyRequest().authenticated()
+            	)
             .formLogin(form -> form
-                .loginProcessingUrl("/login")
+            		 .loginPage("/connexion")  // 👈 Page JSP à afficher
+                     .loginProcessingUrl("/login")  // 👈 URL où le formulaire POST ses données (DIFFÉRENT!)
                 .usernameParameter("username") // 👈 AJOUTÉ: accepte "username" du formulaire
                 .defaultSuccessUrl("/utilisateurs", true) // 👈 AJOUTÉ: redirection après login
-                .failureUrl("/login?error=true") // 👈 AJOUTÉ: redirection si erreur
+                .failureUrl("/connexion?error=true") // 👈 AJOUTÉ: redirection si erreur
                 .permitAll()
             )
-            .logout(logout -> logout.permitAll());
-
+            .logout(logout -> logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/connexion?logout=true")
+                    .permitAll()
+                );
         return http.build();
     }
 
