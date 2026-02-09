@@ -1,4 +1,4 @@
-package com.ifri.XAYA;
+package com.ifri.XAYA.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,25 +23,37 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-            	    // Ajoute "/error" ici absolument
-            	    .requestMatchers("/connexion", "/login", "/error", "/inscription", "/css/**", "/js/**", "/images/**").permitAll()
-            	    .requestMatchers("/admin/**").hasRole("ADMIN")
-            	    .anyRequest().authenticated()
-            	)
-            .formLogin(form -> form
-            		 .loginPage("/connexion")  // 👈 Page JSP à afficher
-                     .loginProcessingUrl("/login")  // 👈 URL où le formulaire POST ses données (DIFFÉRENT!)
-                .usernameParameter("username") // 👈 AJOUTÉ: accepte "username" du formulaire
-                .defaultSuccessUrl("/utilisateurs", true) // 👈 AJOUTÉ: redirection après login
-                .failureUrl("/connexion?error=true") // 👈 AJOUTÉ: redirection si erreur
-                .permitAll()
-            )
-            .logout(logout -> logout
+                    .requestMatchers(
+                        "/connexion",
+                        "/login",
+                        "/error",
+                        "/inscription",
+                        "/logout",
+                        "/WEB-INF/**",
+                        "/css/**",
+                        "/js/**",
+                        "/images/**"
+                    ).permitAll()
+                    .anyRequest().authenticated()
+                )
+
+                .formLogin(form -> form
+                    .loginPage("/connexion")          // page JSP
+                    .loginProcessingUrl("/login")     // POST du formulaire
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/", true)
+                    .failureUrl("/connexion?error=true")
+                    .permitAll()
+                )
+
+                .logout(logout -> logout
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/connexion?logout=true")
                     .permitAll()
                 );
-        return http.build();
+
+            return http.build();
     }
 
     @Bean

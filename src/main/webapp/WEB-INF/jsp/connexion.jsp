@@ -513,14 +513,12 @@
                 <form action="${pageContext.request.contextPath}/login" method="post" id="loginForm">
                     <!-- Email -->
                     <div class="form-floating">
-                        <input type="text" 
-                               class="form-control" 
-                               id="username" 
-                               name="username" 
-                               placeholder="Nom d'utilisateur" 
-                               required>
-                        <label for="username">Nom d'utilisateur</label>
-                        <i class="fas fa-envelope input-icon"></i>
+						<input type="email" 
+						       id="username" 
+						       name="username" 
+						       placeholder="Email">
+						<label for="username">Adresse email</label>
+						<i class="fas fa-envelope input-icon"></i>
                     </div>
 
                     <!-- Mot de passe -->
