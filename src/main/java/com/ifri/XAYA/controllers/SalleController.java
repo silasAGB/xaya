@@ -5,6 +5,7 @@ import com.ifri.XAYA.services.SalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,21 +17,28 @@ public class SalleController {
     private SalleService salleService;
     
     @GetMapping
-    public String listSalles(Model model) {
-        model.addAttribute("salles", salleService.getAllSalles());
-        return "salle/list";
+    public String listSalles() {
+        return "redirect:/"; 
     }
     
     @GetMapping("/nouveau")
     public String showCreateForm(Model model) {
         model.addAttribute("salle", new Salle());
-        return "salle/form";
+        return "salles/form"; // Vérifie que ton fichier est bien dans /WEB-INF/jsp/salles/form.jsp
+    }
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        // Transforme les chaînes vides envoyées par le formulaire en NULL
+        binder.registerCustomEditor(String.class, new org.springframework.beans.propertyeditors.StringTrimmerEditor(true));
     }
     
     @PostMapping("/save")
     public String saveSalle(@ModelAttribute("salle") Salle salle) {
+        // Le 400 vient souvent d'ici : si un champ est nul ou mal formaté
         salleService.saveSalle(salle);
-        return "redirect:/salles";
+        // Redirection vers la page d'accueil (index)
+        return "redirect:/"; 
     }
     
     @GetMapping("/edit/{id}")
@@ -38,7 +46,7 @@ public class SalleController {
         Salle salle = salleService.getSalleById(id)
             .orElseThrow(() -> new IllegalArgumentException("Salle invalide: " + id));
         model.addAttribute("salle", salle);
-        return "salle/form";
+        return "salles/form";
     }
     
     @GetMapping("/delete/{id}")

@@ -24,6 +24,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(
+                    		"/",
                         "/connexion",
                         "/login",
                         "/error",
@@ -34,6 +35,8 @@ public class SecurityConfig {
                         "/js/**",
                         "/images/**"
                     ).permitAll()
+                    .requestMatchers("/reservations/**").authenticated() // <--- Oblige la connexion
+                    .requestMatchers("/utilisateurs/**").hasRole("ADMIN") // Seul l'admin peut gérer les users
                     .anyRequest().authenticated()
                 )
 

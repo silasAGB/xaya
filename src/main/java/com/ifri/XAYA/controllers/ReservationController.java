@@ -24,22 +24,29 @@ public class ReservationController {
     @Autowired
     private SalleService salleService;
     
-    @GetMapping
+    @GetMapping("/list")
     public String listReservations(Model model) {
         model.addAttribute("reservations", reservationService.getAllReservations());
-        return "reservation/list";
+        return "reservations/list";
     }
     
-    @GetMapping("/nouveau")
-    public String showCreateForm(Model model) {
-        model.addAttribute("reservation", new Reservation());
+ // NOUVELLE MÉTHODE : Validation par l'Admin
+ 
+    
+    @GetMapping("/nouveau") // L'URL est : localhost:8080/reservations/nouveau
+    public String showCreateForm(Model model, @RequestParam(required = false) Long salleId) {
+        Reservation res = new Reservation();
+        model.addAttribute("reservation", res);
+        
+        // On récupère la liste pour le formulaire
         model.addAttribute("utilisateurs", utilisateurService.getAllUtilisateurs());
         model.addAttribute("salles", salleService.getAllSalles());
-        return "reservation/form";
+        
+        return "reservations/form"; // Vérifie bien le 's' à reservations
     }
     
     @PostMapping("/save")
-    public String saveReservation(@ModelAttribute("reservation") Reservation reservation,
+    public String saveReservation(@ModelAttribute("reservations") Reservation reservation,
                                  @RequestParam Long utilisateurId,
                                  @RequestParam Long salleId) {
         reservation.setUtilisateur(utilisateurService.getUtilisateurById(utilisateurId)

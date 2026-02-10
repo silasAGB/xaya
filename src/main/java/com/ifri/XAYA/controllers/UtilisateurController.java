@@ -14,20 +14,20 @@ public class UtilisateurController {
     @Autowired
     private UtilisateurService utilisateurService;
     
-    @GetMapping
+    @GetMapping("/list") // Ajoute explicitement /list ici
     public String listUtilisateurs(Model model) {
         model.addAttribute("utilisateurs", utilisateurService.getAllUtilisateurs());
-        return "utilisateur/list";
+        return "utilisateurs/list"; 
     }
     
     @GetMapping("/nouveau")
     public String showCreateForm(Model model) {
         model.addAttribute("utilisateur", new Utilisateur());
-        return "utilisateur/form";
+        return "utilisateurs/form";
     }
     
     @PostMapping("/save")
-    public String saveUtilisateur(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+    public String saveUtilisateur(@ModelAttribute("utilisateurs") Utilisateur utilisateur) {
         utilisateurService.saveUtilisateur(utilisateur);
         return "redirect:/utilisateurs";
     }
@@ -37,7 +37,7 @@ public class UtilisateurController {
         Utilisateur utilisateur = utilisateurService.getUtilisateurById(id)
             .orElseThrow(() -> new IllegalArgumentException("Utilisateur invalide: " + id));
         model.addAttribute("utilisateur", utilisateur);
-        return "utilisateur/form";
+        return "utilisateurs/form";
     }
     
     @GetMapping("/delete/{id}")
