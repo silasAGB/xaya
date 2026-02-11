@@ -29,7 +29,7 @@ public class UtilisateurController {
     @PostMapping("/save")
     public String saveUtilisateur(@ModelAttribute("utilisateurs") Utilisateur utilisateur) {
         utilisateurService.saveUtilisateur(utilisateur);
-        return "redirect:/utilisateurs";
+        return "redirect:/utilisateurs/list";
     }
     
     @GetMapping("/edit/{id}")

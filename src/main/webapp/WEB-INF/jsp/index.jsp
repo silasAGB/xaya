@@ -205,6 +205,16 @@
 	                    <div class="col-md-4">
 	                        <div class="card h-100 shadow-sm border-0 card-salle">
 	                            <div class="position-relative">	                                
+									<c:choose>
+									   <c:when test="${not empty salle.imageUrl}">
+									     <img src="${salle.imageUrl}" class="card-img-top" alt="${salle.nom}" 
+									       onerror="this.src='https://via.placeholder.com/400x250/667eea/ffffff?text=Salle+de+Fête'">
+									         </c:when>
+									          <c:otherwise>
+									           <img src="https://img.freepik.com/vecteurs-libre/employe-banque-fournissant-services-aux-clients_74855-4364.jpg?semt=ais_wordcount_boost&w=740&q=80" 
+									         class="card-img-top" alt="Image par défaut">
+									     </c:otherwise>
+									  </c:choose>
 	                                <span class="badge m-3 ${salle.disponible ? 'bg-success' : 'bg-danger'}">
 	                                    ${salle.disponible ? 'Disponible' : 'Indisponible'}
 	                                </span>

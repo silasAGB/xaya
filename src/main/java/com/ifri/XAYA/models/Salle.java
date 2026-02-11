@@ -2,7 +2,6 @@ package com.ifri.XAYA.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,37 +14,50 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "salles")
 public class Salle {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(nullable = false, length = 150)
     private String nom;
-
+    
     @Column(nullable = false)
     private Integer capacite;
-
+    
     @Column(nullable = false, length = 150)
     private String localisation;
-
+    
     @Column(nullable = false)
-    private boolean disponible = true;  // Valeur par défaut
-
+    private boolean disponible = true;
+    
+    // 🆕 NOUVEAU : URL de l'image
+    @Column(length = 500)
+    private String imageUrl;
+    
     @OneToMany(mappedBy = "salle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
-
+    
     // Constructeurs
     public Salle() {}
-
+    
     public Salle(String nom, Integer capacite, String localisation, boolean disponible) {
         this.nom = nom;
         this.capacite = capacite;
         this.localisation = localisation;
         this.disponible = disponible;
     }
-
-    // Getters et Setters
+    
+    // Constructeur avec image
+    public Salle(String nom, Integer capacite, String localisation, boolean disponible, String imageUrl) {
+        this.nom = nom;
+        this.capacite = capacite;
+        this.localisation = localisation;
+        this.disponible = disponible;
+        this.imageUrl = imageUrl;
+    }
+    
+    // Getters et Setters existants...
     public Long getId() { 
         return id; 
     }
@@ -53,7 +65,7 @@ public class Salle {
     public void setId(Long id) { 
         this.id = id; 
     }
-
+    
     public String getNom() { 
         return nom; 
     }
@@ -61,7 +73,7 @@ public class Salle {
     public void setNom(String nom) { 
         this.nom = nom; 
     }
-
+    
     public Integer getCapacite() { 
         return capacite; 
     }
@@ -69,7 +81,7 @@ public class Salle {
     public void setCapacite(Integer capacite) { 
         this.capacite = capacite; 
     }
-
+    
     public String getLocalisation() { 
         return localisation; 
     }
@@ -77,8 +89,7 @@ public class Salle {
     public void setLocalisation(String localisation) { 
         this.localisation = localisation; 
     }
-
-    // CORRECTION : Pour boolean, utilisez "is" au lieu de "get"
+    
     public boolean isDisponible() { 
         return disponible; 
     }
@@ -86,7 +97,16 @@ public class Salle {
     public void setDisponible(boolean disponible) { 
         this.disponible = disponible; 
     }
-
+    
+    // 🆕 NOUVEAU : Getter/Setter pour imageUrl
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
     public List<Reservation> getReservations() { 
         return reservations; 
     }

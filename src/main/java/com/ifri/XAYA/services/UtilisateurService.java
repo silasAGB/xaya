@@ -4,6 +4,7 @@ package com.ifri.XAYA.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ifri.XAYA.models.Utilisateur;
 import com.ifri.XAYA.repositories.UtilisateurRepository;
@@ -18,6 +19,9 @@ public class UtilisateurService {
     @Autowired
     private UtilisateurRepository utilisateurRepo;
     
+    @Autowired
+    private PasswordEncoder passwordEncoder; 
+    
     public List<Utilisateur> getAllUtilisateurs() {
         return utilisateurRepo.findAll();
     }
@@ -28,8 +32,36 @@ public class UtilisateurService {
     
     
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
+    	
+    	if (utilisateur.getId() == null) {
+            utilisateur.setMotDePasse(
+                    passwordEncoder.encode(utilisateur.getMotDePasse())
+            );
+        }
+    	
+    	else {
+            Utilisateur existingUser = utilisateurRepo
+                    .findById(utilisateur.getId())
+                    .orElseThrow();
+
+            // Si un nouveau mot de passe est saisi
+            if (utilisateur.getMotDePasse() != null &&
+                !utilisateur.getMotDePasse().isBlank()) {
+
+                utilisateur.setMotDePasse(
+                        passwordEncoder.encode(utilisateur.getMotDePasse())
+                );
+            }
+            // Sinon on garde l'ancien
+            else {
+                utilisateur.setMotDePasse(existingUser.getMotDePasse());
+            }
+        }
+    	
         return utilisateurRepo.save(utilisateur);
     }
+    
+    
     
     public void deleteUtilisateur(Long id) {
     	utilisateurRepo.deleteById(id);
