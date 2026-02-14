@@ -70,4 +70,8 @@ public class UtilisateurService {
     public void deleteUtilisateur(Long id) {
         utilisateurRepo.deleteById(id);
     }
+    
+    public Optional<Utilisateur> findByEmail(String email) {
+        return utilisateurRepo.findByEmail(email);
+    }
 }

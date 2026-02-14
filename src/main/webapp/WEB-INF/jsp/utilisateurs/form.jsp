@@ -96,7 +96,7 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div class="container d-flex justify-content-center">
     <div class="form-card">

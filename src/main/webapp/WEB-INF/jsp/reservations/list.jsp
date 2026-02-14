@@ -13,68 +13,121 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white; padding: 60px 0; border-radius: 0;
         }
+		.table-container {
+		    margin-top: 30px; /* Chevauchement élégant sur le header */
+		}
+
+		.card-custom {
+		    border: none;
+		    border-radius: 20px;
+		    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+		    overflow: hidden;
+		}
+
+		.table thead {
+		    background-color: #f1f4f9;
+		    text-transform: uppercase;
+		    font-size: 0.85rem;
+		    letter-spacing: 1px;
+		}
+
+		.table thead th {
+		    padding: 20px;
+		    border: none;
+		    color: #555;
+		}
+
+		.table tbody td {
+		    padding: 20px;
+		    vertical-align: middle;
+		    border-color: #f1f4f9;
+		}
         .status-pill { padding: 5px 15px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; }
         .pending { background: #fff3cd; color: #856404; }
         .confirmed { background: #d4edda; color: #155724; }
         .card-table { border: none; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-top: 30px; }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<%@ include file="../fragments/navbar.jsp" %>
-<div class="header-gradient text-center shadow">
+<div class="header-gradient text-center shadow flex-grow-1">
     <div class="container">
         <h2 class="fw-bold"><i class="fas fa-tasks me-2"></i>Gestion des Réservations</h2>
         <p class="opacity-75">Validez les demandes des clients en un clic</p>
     </div>
 	
-	<div class="container">
-	    <div class="card card-table">
+	<div class="container table-container">
+	    <div class="card card-custom">
 	        <div class="card-body p-0">
-	            <table class="table table-hover align-middle mb-0">
+				<div class="table-responsive">
+					                   <table class="table table-hover mb-0">
 	                <thead class="table-light">
-	                    <tr>
-	                        <th class="ps-4">Client</th>
-	                        <th>Salle</th>
-	                        <th>Date Événement</th>
-	                        <th>Statut</th>
-	                        <th class="text-center">Action Admin</th>
-	                    </tr>
+						<tr>
+						                            <th>Client</th>
+						                            <th>Salle</th>
+						                            <th>Date</th>
+						                            <th>Horaires</th>
+						                            <th>Statut</th>
+						                            <th>Actions</th>
+						</tr>
 	                </thead>
-	                <tbody>
-	                    <c:forEach items="${reservations}" var="res">
-	                        <tr>
-	                            <td class="ps-4">
-	                                <div class="fw-bold">${res.utilisateur.nom}</div>
-	                                <div class="small text-muted">${res.utilisateur.email}</div>
-	                            </td>
-	                            <td><span class="badge bg-light text-primary border">${res.salle.nom}</span></td>
-	                            <td><i class="far fa-calendar-alt me-2 text-muted"></i>${res.dateEvenement}</td>
-	                            <td>
-	                                <c:choose>
-	                                    <c:when test="${res.valide}">
-	                                        <span class="status-pill confirmed"><i class="fas fa-check-circle me-1"></i>Confirmée</span>
-	                                    </c:when>
-	                                    <c:otherwise>
-	                                        <span class="status-pill pending"><i class="fas fa-clock me-1"></i>En attente</span>
-	                                    </c:otherwise>
-	                                </c:choose>
-	                            </td>
-	                            <td class="text-center">
-	                                <c:if test="${!res.valide}">
-	                                    <form action="${pageContext.request.contextPath}/reservations/valider/${res.id}" method="post">
-	                                        <button type="submit" class="btn btn-success btn-sm rounded-pill px-3 shadow-sm">
-	                                            <i class="fas fa-check me-1"></i> Valider la réservation
-	                                        </button>
-	                                    </form>
-	                                </c:if>
-	                                <c:if test="${res.valide}">
-	                                    <button class="btn btn-light btn-sm rounded-pill px-3 disabled">Déjà traitée</button>
-	                                </c:if>
-	                            </td>
-	                        </tr>
-	                    </c:forEach>
-	                </tbody>
+	              <tbody>
+                        <c:forEach items="${reservations}" var="res">
+                            <tr>
+                                <td>
+                                    <strong>${res.utilisateur.nom}</strong><br>
+                                    <small class="text-muted">${res.utilisateur.email}</small>
+                                </td>
+                                <td>${res.salle.nom}</td>
+                                <td>${res.dateReservation}</td>
+                                <td>
+                                    <span class="badge bg-info">
+                                        ${res.heureDebut} - ${res.heureFin}
+                                    </span>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${res.statut == 'VALIDEE'}">
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check-circle"></i> Validée
+                                            </span>
+                                        </c:when>
+                                        <c:when test="${res.statut == 'REJETEE'}">
+                                            <span class="badge bg-danger">
+                                                <i class="fas fa-times-circle"></i> Rejetée
+                                            </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-clock"></i> En attente
+                                            </span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <c:if test="${res.statut == 'EN_ATTENTE'}">
+                                        <form action="${pageContext.request.contextPath}/reservations/valider/${res.id}" 
+                                              method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-check"></i> Valider
+                                            </button>
+                                        </form>
+                                        <form action="${pageContext.request.contextPath}/reservations/rejeter/${res.id}" 
+                                              method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-times"></i> Rejeter
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${res.statut != 'EN_ATTENTE'}">
+                                        <span class="text-muted">Traité</span>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
 	            </table>
+				</div>
 	        </div>
 	    </div>
 	</div>

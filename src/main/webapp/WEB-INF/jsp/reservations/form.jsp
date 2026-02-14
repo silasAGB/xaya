@@ -62,12 +62,12 @@
             color: #764ba2;
         }
         
-        .form-control {
+        .form-control, .form-select {
             border-left: none;
             padding: 12px;
         }
         
-        .form-control:focus {
+        .form-control:focus, .form-select:focus {
             border-color: #667eea;
             box-shadow: none;
         }
@@ -100,7 +100,7 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div class="container d-flex justify-content-center">
     <div class="reservation-card">
@@ -114,37 +114,69 @@
             </div>
 
             <div class="card-body p-4 p-md-5 bg-white">
+				<!-- ✅ Afficher l'utilisateur connecté -->
+				              <div class="user-info">
+				                  
+				                  <div class="fw-bold">
+									<i class="fas fa-user-circle me-2"></i>
+									<small class="text-muted">Réservation au nom de :</small>
+				                      ${utilisateurConnecte.nom}
+				                  </div>
+				              </div>
                 
                 <form action="${pageContext.request.contextPath}/reservations/save" method="post">
-                    <input type="hidden" name="salleId" value="${param.salleId}">
+					<form action="${pageContext.request.contextPath}/reservations/save" method="post">
+					              <!-- ✅ ID de l'utilisateur connecté (hidden) -->
+					              <input type="hidden" name="utilisateurId" value="${utilisateurConnecte.id}">
+					              
+					              <!-- ✅ Salle ID (hidden car déjà récupéré) -->
+					              <input type="hidden" name="salleId" value="${param.salleId}">
 
+                    <!-- Badge affichant la salle -->
                     <div class="text-center mb-4">
                         <span class="room-badge">
                             <i class="fas fa-door-open me-2"></i>Salle ID : #${param.salleId}
                         </span>
                     </div>
 
+                    <!-- ✅ Date de réservation (devient dateReservation) -->
                     <div class="mb-4">
-                        <label for="date" class="form-label fw-bold">Date de l'événement</label>
+                        <label for="dateReservation" class="form-label fw-bold">Date de l'événement</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-                            <input type="date" class="form-control" id="date" name="dateEvenement" required>
+                            <input type="date" 
+                                   class="form-control" 
+                                   id="dateReservation" 
+                                   name="dateReservation" 
+                                   required>
                         </div>
                     </div>
 
+                    <!-- ✅ Heure de début (nouveau champ) -->
                     <div class="mb-4">
-                        <label for="nbPers" class="form-label fw-bold">Nombre d'invités</label>
+                        <label for="heureDebut" class="form-label fw-bold">Heure de début</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-users"></i></span>
-                            <input type="number" class="form-control" id="nbPers" name="nombrePersonnes" placeholder="Ex: 150" required min="1">
+                            <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                            <input type="time" 
+                                   class="form-control" 
+                                   id="heureDebut" 
+                                   name="heureDebut" 
+                                   value="08:00"
+                                   required>
                         </div>
                     </div>
 
+                    <!-- ✅ Heure de fin (nouveau champ) -->
                     <div class="mb-4">
-                        <label for="comm" class="form-label fw-bold">Besoins spécifiques</label>
+                        <label for="heureFin" class="form-label fw-bold">Heure de fin</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-comment-dots"></i></span>
-                            <textarea class="form-control" id="comm" name="commentaire" rows="3" placeholder="Traiteur, décoration, sono..."></textarea>
+                            <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                            <input type="time" 
+                                   class="form-control" 
+                                   id="heureFin" 
+                                   name="heureFin" 
+                                   value="23:00"
+                                   required>
                         </div>
                     </div>
 
@@ -167,11 +199,24 @@
 
 <script>
     // Empêche la sélection de dates passées
-    const dateInput = document.getElementById('date');
+    const dateInput = document.getElementById('dateReservation');
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
+    
+    // Validation : heureFin doit être après heureDebut
+    const heureDebut = document.getElementById('heureDebut');
+    const heureFin = document.getElementById('heureFin');
+    
+    heureFin.addEventListener('change', function() {
+        if (heureDebut.value && heureFin.value) {
+            if (heureFin.value <= heureDebut.value) {
+                alert("L'heure de fin doit être après l'heure de début");
+                heureFin.value = '';
+            }
+        }
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+</body >
 </html>

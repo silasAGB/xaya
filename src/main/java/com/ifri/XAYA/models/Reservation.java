@@ -1,15 +1,8 @@
 package com.ifri.XAYA.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "reservations")
@@ -22,12 +15,16 @@ public class Reservation {
     @Column(nullable = false)
     private LocalDate dateReservation;
     
-    @Column(nullable = false)
-    private LocalDate heureDebut;
+    @Column(nullable = false, columnDefinition = "TIME")
+    private LocalTime heureDebut;
     
-    @Column(nullable = false)
-    private LocalDate heureFin;
+    @Column(nullable = false, columnDefinition = "TIME")
+    private LocalTime heureFin;
     
+    // ✅ AJOUT : Statut de la réservation
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatutReservation statut = StatutReservation.EN_ATTENTE;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "utilisateur_id", nullable = false)
@@ -40,31 +37,71 @@ public class Reservation {
     // Constructeurs
     public Reservation() {}
     
-    public Reservation(LocalDate dateReservation, LocalDate heureDebut, 
-    		LocalDate heureFin, Utilisateur utilisateur, Salle salle) {
+    public Reservation(LocalDate dateReservation, LocalTime heureDebut, 
+                      LocalTime heureFin, Utilisateur utilisateur, Salle salle) {
         this.dateReservation = dateReservation;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
         this.utilisateur = utilisateur;
         this.salle = salle;
+        this.statut = StatutReservation.EN_ATTENTE;
     }
     
     // Getters et Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { 
+        return id; 
+    }
     
-    public LocalDate getDateReservation() { return dateReservation; }
-    public void setDateReservation(LocalDate dateReservation) { this.dateReservation = dateReservation; }
+    public void setId(Long id) { 
+        this.id = id; 
+    }
     
-    public LocalDate getHeureDebut() { return heureDebut; }
-    public void setHeureDebut(LocalDate heureDebut) { this.heureDebut = heureDebut; }
+    public LocalDate getDateReservation() { 
+        return dateReservation; 
+    }
     
-    public LocalDate getHeureFin() { return heureFin; }
-    public void setHeureFin(LocalDate heureFin) { this.heureFin = heureFin; }
+    public void setDateReservation(LocalDate dateReservation) { 
+        this.dateReservation = dateReservation; 
+    }
     
-    public Utilisateur getUtilisateur() { return utilisateur; }
-    public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur = utilisateur; }
+    public LocalTime getHeureDebut() { 
+        return heureDebut; 
+    }
     
-    public Salle getSalle() { return salle; }
-    public void setSalle(Salle salle) { this.salle = salle; }
+    public void setHeureDebut(LocalTime heureDebut) { 
+        this.heureDebut = heureDebut; 
+    }
+    
+    public LocalTime getHeureFin() { 
+        return heureFin; 
+    }
+    
+    public void setHeureFin(LocalTime heureFin) { 
+        this.heureFin = heureFin; 
+    }
+    
+    // ✅ AJOUT : Getter/Setter pour le statut
+    public StatutReservation getStatut() { 
+        return statut; 
+    }
+    
+    public void setStatut(StatutReservation statut) { 
+        this.statut = statut; 
+    }
+    
+    public Utilisateur getUtilisateur() { 
+        return utilisateur; 
+    }
+    
+    public void setUtilisateur(Utilisateur utilisateur) { 
+        this.utilisateur = utilisateur; 
+    }
+    
+    public Salle getSalle() { 
+        return salle; 
+    }
+    
+    public void setSalle(Salle salle) { 
+        this.salle = salle; 
+    }
 }

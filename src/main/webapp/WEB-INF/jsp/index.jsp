@@ -74,80 +74,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="/">
-                <i class="fas fa-champagne-glasses me-2"></i>
-                XAYA
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <!-- Menu pour utilisateurs non connectés -->
-                    <sec:authorize access="!isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/connexion">Se connecter</a>
-                        </li>
-                       
-                    </sec:authorize>
-                    
-                    <!-- Menu pour clients connectés -->
-                    <sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#salles">Salles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/mes-reservations">Mes réservations</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle"></i>
-                                <sec:authentication property="principal.username"/>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/profil">Mon profil</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form action="/logout" method="post" style="display:inline;">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </sec:authorize>
-                    
-                    <!-- Menu pour administrateurs -->
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/utilisateurs/list">Utilisateurs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/reservations/list">Réservations</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-shield"></i>
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form action="/logout" method="post" style="display:inline;">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </sec:authorize>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<%@ include file="fragments/navbar.jsp" %>
     
     <!-- Hero Section -->
     <section class="hero-section text-center">
@@ -272,16 +199,7 @@
 	    </section>
     
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2026 XAYA - Tous droits réservés</p>
-            <div class="mt-2">
-                <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
+<%@ include file="fragments/footer.jsp" %>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

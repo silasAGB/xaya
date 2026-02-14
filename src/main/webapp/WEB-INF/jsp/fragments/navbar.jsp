@@ -15,7 +15,7 @@
                     <!-- Menu pour utilisateurs non connectés -->
                     <sec:authorize access="!isAuthenticated()">
                         <li class="nav-item">
-                            <a class="nav-link" href="#salles">Salles</a>
+                            <a class="nav-link" href="/">Salles</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/connexion">Se connecter</a>
@@ -28,28 +28,27 @@
                     <!-- Menu pour clients connectés -->
                     <sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
                         <li class="nav-item">
-                            <a class="nav-link" href="#salles">Salles</a>
+                            <a class="nav-link" href="/">Salles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/mes-reservations">Mes réservations</a>
+                            <a class="nav-link" href="/reservations/mesReservations">Mes réservations</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle"></i>
-                                <sec:authentication property="principal.username"/>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/profil">Mon profil</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form action="/logout" method="post" style="display:inline;">
-                                        <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+						<li class="nav-item dropdown">
+						                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+						                                <i class="fas fa-user-circle"></i>
+						                                <sec:authentication property="principal.username"/>
+						                            </a>
+						                            <ul class="dropdown-menu">
+						                                <li><hr class="dropdown-divider"></li>
+						                                <li>
+						                                    <form action="/logout" method="post" style="display:inline;">
+						                                        <button type="submit" class="dropdown-item">
+						                                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+						                                        </button>
+						                                    </form>
+						                                </li>
+						                            </ul>
+						                        </li>
                     </sec:authorize>
                     
                     <!-- Menu pour administrateurs -->
@@ -66,7 +65,6 @@
                                 Admin
                             </a>
                             <ul class="dropdown-menu">
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form action="/logout" method="post" style="display:inline;">
                                         <button type="submit" class="dropdown-item">
