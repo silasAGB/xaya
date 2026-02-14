@@ -174,7 +174,7 @@
 	                                    <sec:authorize access="!hasRole('ADMIN')">
 	                                        <c:choose>
 	                                            <c:when test="${salle.disponible}">
-	                                                <a href="${pageContext.request.contextPath}/reservations/nouveau?salleId=${salle.id}" class="btn btn-primary w-100 py-2 fw-bold">
+	                                                <a href="${pageContext.request.contextPath}/reservations/nouveau?salleId=${salle.id}&nomSalle=${salle.nom}" class="btn btn-primary w-100 py-2 fw-bold">
 	                                                    <i class="fas fa-calendar-check me-2"></i>RÉSERVER
 	                                                </a>
 	                                            </c:when>

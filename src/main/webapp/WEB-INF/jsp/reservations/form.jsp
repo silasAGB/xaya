@@ -135,7 +135,7 @@
                     <!-- Badge affichant la salle -->
                     <div class="text-center mb-4">
                         <span class="room-badge">
-                            <i class="fas fa-door-open me-2"></i>Salle ID : #${param.salleId}
+                            <i class="fas fa-door-open me-2"></i>Salle de fête : ${param.nomSalle}
                         </span>
                     </div>
 
