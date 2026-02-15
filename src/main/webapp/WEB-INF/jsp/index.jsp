@@ -138,7 +138,7 @@
 									       onerror="this.src=''">
 									         </c:when>
 									          <c:otherwise>
-									           <img src="" 
+									           <img src="${pageContext.request.contextPath}/uploads/salles/default.jpg" 
 									         class="card-img-top" alt="Image par défaut">
 									     </c:otherwise>
 									  </c:choose>
