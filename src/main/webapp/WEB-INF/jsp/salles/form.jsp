@@ -187,7 +187,7 @@
                         <c:if test="${not empty salle.imageUrl}">
                             <div class="mt-3 text-center">
                                 <small class="text-muted d-block mb-2">Image actuelle :</small>
-                                <img src="${salle.imageUrl}" alt="Image actuelle" 
+                                <img src="${pageContext.request.contextPath}${salle.imageUrl}" alt="Image actuelle" 
                                      style="max-width: 200px; border-radius: 8px;">
                             </div>
                         </c:if>

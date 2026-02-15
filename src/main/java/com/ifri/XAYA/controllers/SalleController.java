@@ -24,8 +24,9 @@ public class SalleController {
     @Autowired
     private SalleService salleService;
     
-    @Value("${upload.path:src/main/resources/static/uploads/salles}")
+    @Value("${upload.path:uploads/salles}")
     private String uploadPath;
+    
     
     @GetMapping
     public String listSalles() {
@@ -115,7 +116,8 @@ public class SalleController {
     private void deleteImage(String imageUrl) {
         try {
             if (imageUrl != null && imageUrl.startsWith("/uploads/")) {
-                Path imagePath = Paths.get("src/main/resources/static" + imageUrl);
+                String relativePath = imageUrl.replace("/uploads/", "");
+                Path imagePath = Paths.get("uploads").resolve(relativePath);
                 Files.deleteIfExists(imagePath);
             }
         } catch (IOException e) {
