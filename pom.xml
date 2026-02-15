@@ -12,7 +12,7 @@
 	<groupId>com.ifri</groupId>
 	<artifactId>XAYA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>XAYA</name>
 	<description>Une application web de réservation de salle de fête</description>
 	

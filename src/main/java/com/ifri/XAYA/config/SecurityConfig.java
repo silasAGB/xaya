@@ -32,6 +32,7 @@ public class SecurityConfig {
                         "/inscription",
                         "/logout",
                         "/WEB-INF/**",
+                        "/uploads/**",
                         "/css/**",
                         "/js/**",
                         "/images/**"
