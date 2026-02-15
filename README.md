@@ -9,6 +9,7 @@ Le projet a été réalisé dans un cadre académique.
 👨‍💻 Auteur
 Projet XAYA
 AGBOGBA ZOUNON Silas O. C - etudiant - Master I – Genie Logiciel
+
 DOUGLOUI Doskie Adinette  - etudiante- Master I - Genie Logiciel
 
 Institut de Formation et de Recherche en Informatique (IFRI)
