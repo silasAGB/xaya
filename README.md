@@ -6,11 +6,11 @@ Elle propose un système d’authentification avec rôles (**ADMIN** et **CLIENT
 
 Le projet a été réalisé dans un cadre académique.
 ---
-
 👨‍💻 Auteur
 Projet XAYA
-AGBOGBA ZOUNON Silas O. C etudiant – Genie Logiciel
-DOUGLOUI Adinette Gosky - Genie Logiciel
+AGBOGBA ZOUNON Silas O. C - etudiant - Master I – Genie Logiciel
+DOUGLOUI Doskie Adinette  - etudiante- Master I - Genie Logiciel
+
 Institut de Formation et de Recherche en Informatique (IFRI)
 
 ## 🛠️ Technologies utilisées
@@ -19,7 +19,7 @@ Institut de Formation et de Recherche en Informatique (IFRI)
 - Spring Security
 - Spring Data JPA
 - Hibernate
-- Base de données relationnelle (MySQL / PostgreSQL / H2 selon configuration)
+- Base de données relationnelle (PostgreSQL )
 - Maven
 - HTML / CSS (frontend)
 - JAR exécutable
@@ -46,61 +46,67 @@ com.ifri.XAYA.config.DataInitializer
 ### 🔹 Comptes créés par défaut
 
 #### Administrateurs
-| Nom     | Email              | Mot de passe |
+| Nom    | Email              | Mot de passe |
 |--------|--------------------|--------------|
-| Admin 1 | admin1@xaya.com | admin123 |
-| Admin 2 | admin2@xaya.com | admin123 |
-| Admin 3 | admin3@xaya.com | admin123 |
+| Admin 1 | admin1@xaya.com   | admin123     |
+| Admin 2 | admin2@xaya.com   | admin123     |
+| Admin 3 | admin3@xaya.com   | admin123     |
 
 #### Clients
 | Nom      | Email               | Mot de passe |
-|---------|---------------------|--------------|
-| Client 1 | client1@xaya.com | client123 |
-| Client 2 | client2@xaya.com | client123 |
-| Client 3 | client3@xaya.com | client123 |
+|--------- |---------------------|--------------|
+| Client 1 | client1@xaya.com    | client123    |
+| Client 2 | client2@xaya.com    | client123    |
+| Client 3 | client3@xaya.com    | client123    |
 ---
 
 ### 🔹 Salles créées par défaut
 
-| Nom | Capacité | Localisation | Disponible | Image |
-|---|---|---|---|---|
-| Salle Informatique | 40 | Bloc A | Oui | /images/salles/salle1.jpg |
-| Salle Réunion | 20 | Bloc B | Oui | /images/salles/salle2.jpg |
-| Salle Conférence | 100 | Grand Hall | Oui | /images/salles/salle3.jpg |
+| Nom                | Capacité | Localisation | Disponible | Image 			|
+|---                 |---       |---           |---         |---                        |
+| Salle Informatique | 40       | Bloc A       | Oui        | /images/salles/salle1.jpg |
+| Salle Réunion      | 20       | Bloc B       | Oui        | /images/salles/salle2.jpg |
+| Salle Conférence   | 100      | Grand Hall   | Oui        | /images/salles/salle3.jpg |
 
 ---
 ## ▶️ Exécution du projet
 
 ### 1️⃣ Génération du fichier JAR
-À la racine du projet, exécuter :
 
-""bash
-
-mvn clean package
 Le fichier JAR sera généré dans le dossier :
 
-
 target/
-2️⃣ Lancement de l’application
+
+
+### 2️⃣ Lancement de l’application
 ### Exécuter la commande suivante :
 
 java -jar target/XAYA-0.0.1-SNAPSHOT.jar
 
-🌐 Accès à l’application
+### 🗄️Concernant la base donnée 
+  
+  Nous avions utiliser une base de donnée PostgreSQL
+
+###   Nom de la base : xaya
+ 
+
+### 🌐 Accès à l’application
 Par défaut :
 
 http://localhost:8080
 
-📁 Gestion des images
+### 📁 Gestion des images
 Les images des salles sont chargées depuis le chemin :
 
 /uploads/salles/
 Ces images sont référencées en base de données via l’attribut imageUrl.
 
-🔐 Sécurité
+### 🔐 Sécurité
 Authentification basée sur Spring Security
 
-Mots de passe chiffrés
+### Mots de passe chiffrés
+ 
+  Les utilisateurs sont créer par default au démarrage du projet (ADMIN , Client ) référencer en haut (Compte créer par defaut )
 
 Accès aux fonctionnalités contrôlé par rôle
 
