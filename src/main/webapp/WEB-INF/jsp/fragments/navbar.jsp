@@ -12,7 +12,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Menu pour utilisateurs non connectés -->
+					
+                    
                     <sec:authorize access="!isAuthenticated()">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Salles</a>
@@ -25,13 +26,13 @@
                         </li>
                     </sec:authorize>
                     
-                    <!-- Menu pour clients connectés -->
+                   
                     <sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Salles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/reservations/mesReservations">Mes réservations</a>
+                            <a class="nav-link" href="/reservations/mesReservations">Mes reservations</a>
                         </li>
 						<li class="nav-item dropdown">
 						                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
@@ -43,7 +44,7 @@
 						                                <li>
 						                                    <form action="/logout" method="post" style="display:inline;">
 						                                        <button type="submit" class="dropdown-item">
-						                                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+						                                            <i class="fas fa-sign-out-alt me-2"></i>Deconnexion
 						                                        </button>
 						                                    </form>
 						                                </li>
@@ -51,13 +52,13 @@
 						                        </li>
                     </sec:authorize>
                     
-                    <!-- Menu pour administrateurs -->
+                   
                     <sec:authorize access="hasRole('ADMIN')">
                         <li class="nav-item">
                             <a class="nav-link" href="/utilisateurs/list">Utilisateurs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/reservations/list">Réservations</a>
+                            <a class="nav-link" href="/reservations/list">Reservations</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
@@ -68,7 +69,7 @@
                                 <li>
                                     <form action="/logout" method="post" style="display:inline;">
                                         <button type="submit" class="dropdown-item">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                                            <i class="fas fa-sign-out-alt me-2"></i>Deconnexion
                                         </button>
                                     </form>
                                 </li>

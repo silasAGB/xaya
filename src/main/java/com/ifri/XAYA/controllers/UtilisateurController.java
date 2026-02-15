@@ -14,7 +14,7 @@ public class UtilisateurController {
     @Autowired
     private UtilisateurService utilisateurService;
     
-    @GetMapping("/list") // Ajoute explicitement /list ici
+    @GetMapping("/list") 
     public String listUtilisateurs(Model model) {
         model.addAttribute("utilisateurs", utilisateurService.getAllUtilisateurs());
         return "utilisateurs/list"; 

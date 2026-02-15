@@ -50,12 +50,12 @@ public class SalleController {
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
         
         try {
-            // 🆕 Gestion de l'upload d'image
+           
             if (imageFile != null && !imageFile.isEmpty()) {
                 String imageUrl = saveImage(imageFile);
                 salle.setImageUrl(imageUrl);
             } else if (salle.getId() != null) {
-                // En mode édition, si pas de nouvelle image, garder l'ancienne
+                
                 Salle existingSalle = salleService.getSalleById(salle.getId()).orElse(null);
                 if (existingSalle != null && existingSalle.getImageUrl() != null) {
                     salle.setImageUrl(existingSalle.getImageUrl());
@@ -81,7 +81,7 @@ public class SalleController {
     
     @GetMapping("/delete/{id}")
     public String deleteSalle(@PathVariable Long id) {
-        // 🆕 Supprimer l'image physique avant de supprimer la salle
+        
         Salle salle = salleService.getSalleById(id).orElse(null);
         if (salle != null && salle.getImageUrl() != null) {
             deleteImage(salle.getImageUrl());
@@ -91,9 +91,9 @@ public class SalleController {
         return "redirect:/";
     }
     
-    // 🆕 Méthode pour sauvegarder l'image
+   
     private String saveImage(MultipartFile file) throws IOException {
-        // Créer le dossier s'il n'existe pas
+        
         Path uploadDir = Paths.get(uploadPath);
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir);
@@ -104,15 +104,15 @@ public class SalleController {
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
         String uniqueFilename = UUID.randomUUID().toString() + extension;
         
-        // Sauvegarder le fichier
+        
         Path filePath = uploadDir.resolve(uniqueFilename);
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         
-        // Retourner le chemin relatif pour l'URL
+        
         return "/uploads/salles/" + uniqueFilename;
     }
     
-    // 🆕 Méthode pour supprimer l'image
+ 
     private void deleteImage(String imageUrl) {
         try {
             if (imageUrl != null && imageUrl.startsWith("/uploads/")) {

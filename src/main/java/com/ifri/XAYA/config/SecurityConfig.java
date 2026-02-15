@@ -36,14 +36,14 @@ public class SecurityConfig {
                         "/js/**",
                         "/images/**"
                     ).permitAll()
-                    .requestMatchers("/reservations/**").authenticated() // <--- Oblige la connexion
-                    .requestMatchers("/utilisateurs/**").hasRole("ADMIN") // Seul l'admin peut gérer les users
+                    .requestMatchers("/reservations/**").authenticated() 
+                    .requestMatchers("/utilisateurs/**").hasRole("ADMIN") 
                     .anyRequest().authenticated()
                 )
 
                 .formLogin(form -> form
-                    .loginPage("/connexion")          // page JSP
-                    .loginProcessingUrl("/login")     // POST du formulaire
+                    .loginPage("/connexion")         
+                    .loginProcessingUrl("/login")    
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/", true)

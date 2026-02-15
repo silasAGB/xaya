@@ -14,7 +14,7 @@
             color: white; padding: 60px 0; border-radius: 0;
         }
 		.table-container {
-		    margin-top: 30px; /* Chevauchement élégant sur le header */
+		    margin-top: 30px;
 		}
 
 		.card-custom {

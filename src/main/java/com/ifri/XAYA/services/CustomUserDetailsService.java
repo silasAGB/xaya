@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         
-        // Recherche l'utilisateur dans la base de données
+
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "Utilisateur introuvable avec l'email : " + email));
@@ -35,8 +35,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User.builder()
                 .username(utilisateur.getEmail())
                 .password(utilisateur.getMotDePasse())
-                .roles(utilisateur.getRole().name()) // Ajoute automatiquement "ROLE_"
-                .disabled(!utilisateur.isEnabled())  // Désactive si enabled = false
+                .roles(utilisateur.getRole().name()) 
+                .disabled(!utilisateur.isEnabled())  
                 .build();
     }
 }

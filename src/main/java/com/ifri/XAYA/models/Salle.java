@@ -31,7 +31,7 @@ public class Salle {
     @Column(nullable = false)
     private boolean disponible = true;
     
-    // 🆕 NOUVEAU : URL de l'image
+
     @Column(length = 500)
     private String imageUrl;
     
@@ -57,7 +57,7 @@ public class Salle {
         this.imageUrl = imageUrl;
     }
     
-    // Getters et Setters existants...
+    // Getters et Setters 
     public Long getId() { 
         return id; 
     }
@@ -98,7 +98,7 @@ public class Salle {
         this.disponible = disponible; 
     }
     
-    // 🆕 NOUVEAU : Getter/Setter pour imageUrl
+
     public String getImageUrl() {
         return imageUrl;
     }

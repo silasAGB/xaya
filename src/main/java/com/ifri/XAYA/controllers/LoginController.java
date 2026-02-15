@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
     
-    /**
-     * Affiche la page de connexion
-     * Gère aussi les paramètres error et logout pour afficher les messages appropriés
-     */
+
     @GetMapping("/connexion")
     public String afficherPageConnexion(
             @RequestParam(value = "error", required = false) String error,
@@ -28,7 +25,6 @@ public class LoginController {
             model.addAttribute("message", "Vous avez été déconnecté avec succès");
         }
         
-        // Le nom retourné correspond au fichier JSP dans WEB-INF/jsp/connexion.jsp
         return "connexion";
     }
 }

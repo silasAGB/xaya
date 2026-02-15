@@ -16,7 +16,7 @@
             background-color: #f8f9fa;
         }
         
-        /* Header Premium identique à l'accueil */
+      
         .admin-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -26,7 +26,7 @@
         }
 
         .table-container {
-            margin-top: 30px; /* Chevauchement élégant sur le header */
+            margin-top: 30px; 
         }
 
         .card-custom {

@@ -131,9 +131,9 @@
                     
                     <h4 class="mb-4">Inscription</h4>
                     
-                    <!-- Formulaire -->
+                    
                     <form action="${pageContext.request.contextPath}/inscription" method="post" id="registerForm">
-                        <!-- Nom complet -->
+                       
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom complet</label>
                             <div class="input-group">
@@ -166,7 +166,7 @@
                             </div>
                         </div>
                         
-                        <!-- Mot de passe -->
+                        
                         <div class="mb-3">
                             <label for="motDePasse" class="form-label">Mot de passe</label>
                             <div class="input-group">
@@ -188,7 +188,7 @@
                             <small class="text-muted">Minimum 6 caractères</small>
                         </div>
                         
-                        <!-- Confirmation mot de passe -->
+                       
                         <div class="mb-3">
                             <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
                             <div class="input-group">
@@ -211,7 +211,7 @@
                             </small>
                         </div>
                         
-                        <!-- Conditions d'utilisation -->
+                        
                         <div class="mb-4">
                             <div class="form-check">
                                 <input class="form-check-input" 
@@ -225,19 +225,19 @@
                             </div>
                         </div>
                         
-                        <!-- Bouton d'inscription -->
+                        
                         <button type="submit" class="btn btn-primary w-100 mb-3">
                             <i class="fas fa-user-plus me-2"></i>
                             Créer mon compte
                         </button>
                     </form>
                     
-                    <!-- Divider -->
+                   
                     <div class="text-center my-3">
                         <span class="text-muted">ou</span>
                     </div>
                     
-                    <!-- Lien connexion -->
+                   
                     <div class="text-center">
                         <p class="mb-0">Vous avez déjà un compte ? 
                             <a href="${pageContext.request.contextPath}/connexion" class="text-decoration-none fw-bold">
@@ -252,7 +252,8 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Toggle password visibility
+       
+		
         function togglePassword(fieldId, icon) {
             const field = document.getElementById(fieldId);
             const iconElement = icon.querySelector('i');
@@ -268,7 +269,7 @@
             }
         }
         
-        // Password strength indicator
+
         document.getElementById('motDePasse').addEventListener('input', function(e) {
             const password = e.target.value;
             const strengthBar = document.getElementById('passwordStrength');
@@ -290,7 +291,7 @@
             }
         });
         
-        // Password match validation
+        
         const form = document.getElementById('registerForm');
         const password = document.getElementById('motDePasse');
         const confirmPassword = document.getElementById('confirmPassword');

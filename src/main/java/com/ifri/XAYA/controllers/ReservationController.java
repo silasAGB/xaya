@@ -33,18 +33,14 @@ public class ReservationController {
     // ==========================================
     
     /**
-     * Liste de TOUTES les réservations (Admin uniquement)
-     * URL: /reservations
      */
     @GetMapping("/list")
     public String listReservations(Model model) {
         model.addAttribute("reservations", reservationService.getAllReservations());
-        return "reservations/list";  // ✅ CORRIGÉ: sans 's' à reservation
+        return "reservations/list";  //
     }
     
     /**
-     * Valider une réservation (Admin uniquement)
-     * URL: POST /reservations/valider/{id}
      */
     @PostMapping("/valider/{id}")
     public String validerReservation(@PathVariable Long id) {
@@ -52,10 +48,7 @@ public class ReservationController {
         return "redirect:/reservations/list";
     }
     
-    /**
-     * Rejeter une réservation (Admin uniquement)
-     * URL: POST /reservations/rejeter/{id}
-     */
+
     @PostMapping("/rejeter/{id}")
     public String rejeterReservation(@PathVariable Long id) {
         reservationService.rejeterReservation(id);
@@ -65,21 +58,17 @@ public class ReservationController {
     // ==========================================
     // ROUTES POUR LE CLIENT
     // ==========================================
-    
-    /**
-     * Mes réservations (Client connecté)
-     * URL: /reservations/mes-reservations
-     */
+
     @GetMapping("/mesReservations")
     public String mesReservations(Model model) {
-        // Récupérer l'utilisateur connecté
+      
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
         
         Utilisateur utilisateur = utilisateurService.findByEmail(email)
             .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
         
-        // Récupérer uniquement SES réservations
+    
         model.addAttribute("reservations", 
             reservationService.getReservationsByUtilisateur(utilisateur.getId()));
         
@@ -87,19 +76,16 @@ public class ReservationController {
     }
     
     /**
-     * Formulaire de nouvelle réservation (Client)
-     * URL: /reservations/nouveau?salleId=X
      */
     @GetMapping("/nouveau")
     public String showCreateForm(Model model, @RequestParam(required = false) Long salleId) {
-        // Récupérer l'utilisateur connecté
+ 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
         
         Utilisateur utilisateurConnecte = utilisateurService.findByEmail(email)
             .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
         
-        // Passer l'utilisateur au formulaire
         model.addAttribute("utilisateurConnecte", utilisateurConnecte);
         model.addAttribute("reservation", new Reservation());
         model.addAttribute("salles", salleService.getAllSalles());
@@ -111,10 +97,6 @@ public class ReservationController {
         return "reservations/form";
     }
     
-    /**
-     * Enregistrer une nouvelle réservation (Client)
-     * URL: POST /reservations/save
-     */
     @PostMapping("/save")
     public String saveReservation(
             @RequestParam Long utilisateurId,
@@ -125,34 +107,30 @@ public class ReservationController {
         
         Reservation reservation = new Reservation();
         
-        // Associer l'utilisateur
+
         reservation.setUtilisateur(
             utilisateurService.getUtilisateurById(utilisateurId)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur invalide"))
         );
         
-        // Associer la salle
+
         reservation.setSalle(
             salleService.getSalleById(salleId)
                 .orElseThrow(() -> new IllegalArgumentException("Salle invalide"))
         );
         
-        // Définir les dates et heures
+
         reservation.setDateReservation(LocalDate.parse(dateReservation));
         reservation.setHeureDebut(LocalTime.parse(heureDebut));
         reservation.setHeureFin(LocalTime.parse(heureFin));
         
-        // Sauvegarder (statut = EN_ATTENTE par défaut)
+
         reservationService.saveReservation(reservation);
         
-        // ✅ REDIRECTION : Le client revient sur SES réservations
+
         return "redirect:/reservations/mesReservations";
     }
-    
-    /**
-     * Annuler une réservation (Client - seulement si EN_ATTENTE)
-     * URL: GET /reservations/annuler/{id}
-     */
+
     @GetMapping("/annuler/{id}")
     public String annulerReservation(@PathVariable Long id) {
         reservationService.deleteReservation(id);

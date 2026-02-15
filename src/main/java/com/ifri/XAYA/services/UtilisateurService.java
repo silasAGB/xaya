@@ -34,12 +34,10 @@ public class UtilisateurService {
         return utilisateurRepo.existsByEmail(email);
     }
     
-    /**
-     * Sauvegarde un utilisateur avec encodage du mot de passe
-     */
+
     public Utilisateur saveUtilisateur(Utilisateur utilisateur) {
         
-        // Nouvel utilisateur (inscription)
+
         if (utilisateur.getId() == null) {
             utilisateur.setMotDePasse(
                 passwordEncoder.encode(utilisateur.getMotDePasse())
@@ -51,7 +49,7 @@ public class UtilisateurService {
                 .findById(utilisateur.getId())
                 .orElseThrow();
             
-            // Si un nouveau mot de passe est saisi
+          
             if (utilisateur.getMotDePasse() != null &&
                 !utilisateur.getMotDePasse().isBlank()) {
                 utilisateur.setMotDePasse(

@@ -114,7 +114,7 @@
             </div>
 
             <div class="card-body p-4 p-md-5 bg-white">
-				<!-- ✅ Afficher l'utilisateur connecté -->
+				
 				              <div class="user-info">
 				                  
 				                  <div class="fw-bold">
@@ -126,20 +126,20 @@
                 
                 <form action="${pageContext.request.contextPath}/reservations/save" method="post">
 					<form action="${pageContext.request.contextPath}/reservations/save" method="post">
-					              <!-- ✅ ID de l'utilisateur connecté (hidden) -->
+					            
 					              <input type="hidden" name="utilisateurId" value="${utilisateurConnecte.id}">
 					              
-					              <!-- ✅ Salle ID (hidden car déjà récupéré) -->
+					             
 					              <input type="hidden" name="salleId" value="${param.salleId}">
 
-                    <!-- Badge affichant la salle -->
+                  
                     <div class="text-center mb-4">
                         <span class="room-badge">
                             <i class="fas fa-door-open me-2"></i>Salle de fête : ${param.nomSalle}
                         </span>
                     </div>
 
-                    <!-- ✅ Date de réservation (devient dateReservation) -->
+                    
                     <div class="mb-4">
                         <label for="dateReservation" class="form-label fw-bold">Date de l'événement</label>
                         <div class="input-group">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
 
-                    <!-- ✅ Heure de début (nouveau champ) -->
+                   
                     <div class="mb-4">
                         <label for="heureDebut" class="form-label fw-bold">Heure de début</label>
                         <div class="input-group">
@@ -166,7 +166,7 @@
                         </div>
                     </div>
 
-                    <!-- ✅ Heure de fin (nouveau champ) -->
+                    
                     <div class="mb-4">
                         <label for="heureFin" class="form-label fw-bold">Heure de fin</label>
                         <div class="input-group">
@@ -203,7 +203,7 @@
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
     
-    // Validation : heureFin doit être après heureDebut
+   
     const heureDebut = document.getElementById('heureDebut');
     const heureFin = document.getElementById('heureFin');
     

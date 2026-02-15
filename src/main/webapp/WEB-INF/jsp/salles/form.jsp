@@ -174,7 +174,7 @@
                             <i class="fas fa-image me-2"></i>Image de la salle
                         </label>
                         
-                        <!-- Zone de drag & drop -->
+                       
                         <div class="upload-area" id="uploadArea">
                             <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
                             <p class="mb-2"><strong>Cliquez pour sélectionner</strong> ou glissez-déposez une image</p>
@@ -183,7 +183,7 @@
                                    accept="image/*" style="display: none;">
                         </div>
                         
-                        <!-- Affichage de l'image actuelle en mode édition -->
+                        
                         <c:if test="${not empty salle.imageUrl}">
                             <div class="mt-3 text-center">
                                 <small class="text-muted d-block mb-2">Image actuelle :</small>
@@ -193,7 +193,7 @@
                         </c:if>
                     </div>
 
-                    <!-- 🆕 Aperçu de l'image -->
+                    
                     <div class="mb-4" id="imagePreview" style="display: none;">
                         <label class="form-label fw-bold mb-3">
                             <i class="fas fa-eye me-2"></i>Aperçu
@@ -250,17 +250,17 @@
     const fileName = document.getElementById('fileName');
     const fileSize = document.getElementById('fileSize');
 
-    // Clic sur la zone pour ouvrir le sélecteur
+   
     uploadArea.addEventListener('click', () => {
         imageFile.click();
     });
 
-    // Changement de fichier
+   
     imageFile.addEventListener('change', (e) => {
         handleFile(e.target.files[0]);
     });
 
-    // Drag & Drop
+   
     uploadArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         uploadArea.classList.add('dragover');
@@ -285,7 +285,7 @@
     function handleFile(file) {
         if (!file) return;
         
-        // Vérifier que c'est une image
+        
         if (!file.type.startsWith('image/')) {
             alert('Veuillez sélectionner une image valide');
             return;
@@ -297,7 +297,7 @@
             return;
         }
         
-        // Afficher l'aperçu
+        
         const reader = new FileReader();
         reader.onload = (e) => {
             previewImg.src = e.target.result;
@@ -308,7 +308,7 @@
         reader.readAsDataURL(file);
     }
 
-    // Formater la taille du fichier
+    
     function formatFileSize(bytes) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;

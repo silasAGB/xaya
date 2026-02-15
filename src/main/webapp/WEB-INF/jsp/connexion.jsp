@@ -98,9 +98,9 @@
                     <p class="mb-0 opacity-75">Réservation de salles de fête</p>
                 </div>
                 
-                <!-- Body -->
+                
                 <div class="card-body p-4">
-                    <!-- Messages d'erreur/succès -->
+                    
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <i class="fas fa-exclamation-circle me-2"></i>
@@ -119,7 +119,7 @@
                     
                     <h4 class="mb-4">Connexion</h4>
                     
-                    <!-- Formulaire -->
+                    
                     <form action="${pageContext.request.contextPath}/login" method="post">
                         <!-- Email -->
                         <div class="mb-3">
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                         
-                        <!-- Mot de passe -->
+                        
                         <div class="mb-3">
                             <label for="password" class="form-label">Mot de passe</label>
                             <div class="input-group">
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         
-                        <!-- Se souvenir / Mot de passe oublié -->
+                        
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember" name="remember">
@@ -166,19 +166,19 @@
                             </a>
                         </div>
                         
-                        <!-- Bouton de connexion -->
+                        
                         <button type="submit" class="btn btn-primary w-100 mb-3">
                             <i class="fas fa-sign-in-alt me-2"></i>
                             Se connecter
                         </button>
                     </form>
                     
-                    <!-- Divider -->
+                  
                     <div class="text-center my-3">
                         <span class="text-muted">ou</span>
                     </div>
                     
-                    <!-- Lien inscription -->
+   
                     <div class="text-center">
                         <p class="mb-0">Pas encore de compte ? 
                             <a href="${pageContext.request.contextPath}/inscription" class="text-decoration-none fw-bold">

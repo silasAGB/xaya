@@ -17,17 +17,12 @@ public class InscriptionController {
     @Autowired
     private UtilisateurService utilisateurService;
 
-    /**
-     * Affiche la page d'inscription
-     */
     @GetMapping("/inscription")
     public String showInscriptionForm(Model model) {
         return "inscription";
     }
 
-    /**
-     * Traite le formulaire d'inscription
-     */
+
     @PostMapping("/inscription")
     public String processInscription(
             @RequestParam("nom") String nom,
@@ -54,14 +49,14 @@ public class InscriptionController {
             Utilisateur nouveauUtilisateur = new Utilisateur();
             nouveauUtilisateur.setNom(nom);
             nouveauUtilisateur.setEmail(email);
-            nouveauUtilisateur.setMotDePasse(motDePasse); // sera encodé dans le service
-            nouveauUtilisateur.setRole(Role.CLIENT); // Tous les inscrits sont des clients
-            nouveauUtilisateur.setEnabled(true); // Activation automatique pour le TP
+            nouveauUtilisateur.setMotDePasse(motDePasse); 
+            nouveauUtilisateur.setRole(Role.CLIENT); 
+            nouveauUtilisateur.setEnabled(true); 
 
-            // 4. Sauvegarder l'utilisateur
+ 
             utilisateurService.saveUtilisateur(nouveauUtilisateur);
 
-            // 5. Rediriger vers la page de connexion avec un message de succès
+
             redirectAttributes.addFlashAttribute("message", 
                 "Inscription réussie ! Vous pouvez maintenant vous connecter.");
             return "redirect:/connexion";

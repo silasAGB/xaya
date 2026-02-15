@@ -21,7 +21,7 @@ public class Reservation {
     @Column(nullable = false, columnDefinition = "TIME")
     private LocalTime heureFin;
     
-    // ✅ AJOUT : Statut de la réservation
+   
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatutReservation statut = StatutReservation.EN_ATTENTE;
@@ -80,7 +80,7 @@ public class Reservation {
         this.heureFin = heureFin; 
     }
     
-    // ✅ AJOUT : Getter/Setter pour le statut
+
     public StatutReservation getStatut() { 
         return statut; 
     }

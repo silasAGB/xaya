@@ -33,10 +33,10 @@ public class Utilisateur {
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role; // ADMIN ou CLIENT
+    private Role role;
     
     @Column(nullable = false)
-    private boolean enabled = false; // activation par email
+    private boolean enabled = false;
     
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
